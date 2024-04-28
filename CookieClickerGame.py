@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import font
 
-
+#This is a new branch
 class CookieClickerGame:
     def __init__(self, master):
         # Initialize the game
@@ -17,7 +17,7 @@ class CookieClickerGame:
         self.factories = 0
 
         # Create cookie button
-        self.cookie_button = tk.Button(master, text="Cookie", command=self.click_cookie, bg="brown", fg="white", font=("Arial", 30, "bold"))
+        self.cookie_button = tk.Button(master, text="Cookie", command=self.click_cookie, bg="black", fg="white", font=("Arial", 30, "bold"))
         self.cookie_button.config(width=10, height=3)  # Adjust button size
         self.cookie_button.grid(row=0, column=0, padx=10, pady=10)  # Add padding
 
@@ -33,10 +33,13 @@ class CookieClickerGame:
         self.unlock_cursor_button = tk.Button(self.unlock_frame, text="Cursor - 10", command=self.buy_cursor, font=("Times", 20, "bold"))
         self.unlock_cursor_button.grid(row=0, column=0, padx=10, pady=5)  # Add padding
 
-        self.unlock_worker_button = tk.Button(self.unlock_frame, text="Worker - 20", command=self.buy_worker, font=("Times", 20, "bold"))
+        self.unlock_worker_button = tk.Button(self.unlock_frame, text="Worker - 25", command=self.buy_worker, font=("Times", 20, "bold"))
         self.unlock_worker_button.grid(row=1, column=0, padx=10, pady=5)  # Add padding
 
         self.unlock_factory_button = tk.Button(self.unlock_frame, text="Factory - 50", command=self.buy_factory, font=("Times", 20, "bold"))
+        self.unlock_factory_button.grid(row=2, column=0, padx=10, pady=5)  # Add padding
+
+        self.unlock_factory_button = tk.Button(self.unlock_frame, text="Granny - 100", command=self.buy_factory, font=("Times", 20, "bold"))
         self.unlock_factory_button.grid(row=2, column=0, padx=10, pady=5)  # Add padding
 
         # Create label to display items owned
@@ -66,7 +69,7 @@ class CookieClickerGame:
     def buy_worker(self):
         if self.score >= 20:
             self.score -= 20
-            self.cookies_per_sec += 5
+            self.cookies_per_sec += 10
             self.workers += 1
             self.update_score()
             self.update_items()
@@ -77,6 +80,16 @@ class CookieClickerGame:
         if self.score >= 50:
             self.score -= 50
             self.cookies_per_sec += 15
+            self.factories += 1
+            self.update_score()
+            self.update_items()
+            self.master.after(5000, self.generate_cookies)
+
+        # Function to buy grannys
+    def buy_factory(self):
+        if self.score >= 50:
+            self.score -= 50
+            self.cookies_per_sec += 750
             self.factories += 1
             self.update_score()
             self.update_items()
@@ -98,7 +111,7 @@ class CookieClickerGame:
 
 # Create the main window
 root = tk.Tk()
-root.geometry("600x600")  # Set window size
+root.geometry("600x300")  # Set window size
 
 # Get the window width and height
 window_width = root.winfo_reqwidth()
