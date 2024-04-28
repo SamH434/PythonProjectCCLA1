@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import font
 
-
+#This is a new branch
 class CookieClickerGame:
     def __init__(self, master):
         # Initialize the game
